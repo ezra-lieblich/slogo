@@ -1,6 +1,7 @@
 package FrontEndInternalAPI;
 
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 
 /**
  * @author Delia
@@ -8,7 +9,7 @@ import javafx.scene.control.Button;
 public interface ButtonMenu {
 //    public ButtonMenuk();
 
-    public Button newButton(String text, int x, int y);
+    public Button newButton(String text, ImageView img, int x, int y);
 
     public void addButtons();
 }

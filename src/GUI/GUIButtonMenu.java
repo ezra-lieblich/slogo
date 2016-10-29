@@ -100,22 +100,28 @@ public class GUIButtonMenu implements ButtonMenu{
     /**
      *
      */
-    public void addButtons(){ 
-        Button play = newButton("PLAY", 30, 40);
-        Button pause = newButton("PAUSE", 130, 40);
-        Button stop = newButton("STOP", 240, 40);
-        Button help = newButton("HELP", 1200, 50);
-        System.setProperty("glass.accessible.force", "false");
-        backgroundBox = new ComboBox<String>(backgroundOptions);
-        backgroundBox.setValue(defaultBackground);
-        backgroundBox.setTranslateX(350);
-        backgroundBox.setTranslateY(50);
-        window.getChildren().add(backgroundBox);
-        languageBox = new ComboBox<String>(languageOptions);
-        languageBox.setValue(defaultLanguage);
-        languageBox.setTranslateX(520);
-        languageBox.setTranslateY(50);
-        window.getChildren().add(languageBox);
+    public void addButtons(){
+        Image newImage = new Image(getClass().getClassLoader()
+                                   .getResourceAsStream("images/play.png"));
+        ImageView imgV = new ImageView(newImage);
+        Button play = newButton("PLAY", imgV, 30, 40);
+        newImage = new Image(getClass().getClassLoader()
+                .getResourceAsStream("images/pause.png"));
+        imgV = new ImageView(newImage);
+        Button pause = newButton("PAUSE", imgV, 130, 40);
+        newImage = new Image(getClass().getClassLoader()
+                .getResourceAsStream("images/stop.png"));
+        imgV = new ImageView(newImage);
+        Button stop = newButton("STOP", imgV, 240, 40);
+        newImage = new Image(getClass().getClassLoader()
+                .getResourceAsStream("images/options.png"));
+        imgV = new ImageView(newImage);
+        Button options = newButton("OPTIONS", imgV, 340, 40);
+        options.setOnMouseClicked(e -> optionsHandler());
+        newImage = new Image(getClass().getClassLoader()
+                .getResourceAsStream("images/help.png"));
+        imgV = new ImageView(newImage);
+        Button help = newButton("HELP", imgV, 465, 40);
         help.setOnMouseClicked(e -> helpHandler());
         window.getChildren().add(play);
         window.getChildren().add(pause);
@@ -124,59 +130,19 @@ public class GUIButtonMenu implements ButtonMenu{
         
     }
 
-    @Override
-    /**
-     *
-     */
-    public Button newButton(String text, int x, int y) {
-       
-        ImageView newImage = loadImage(text);
-        Button newButton;
-        if(text.equals("PLAY")){
-            newButton = new Button(text, newImage);
-        }
-        else if(text.equals("PAUSE")){
-            newButton = new Button(text, newImage);  
-        }
-        else if(text.equals("STOP")){
-            newButton = new Button(text, newImage);
-        }
-        else
-        {
-            newButton = new Button(text);
-        }
-        newButton.setStyle(overButton);
-        newButton.setOnMouseEntered(e -> {
-            newButton.setStyle(buttonFill);
-            backdrop.opacityProperty().setValue(0.8);
-        });
-        newButton.setOnMouseExited(e -> newButton.setStyle(overButton));
-        newButton.setTranslateX(x);
-        newButton.setTranslateY(y);
-        return newButton;
-    }
-
-    private ImageView loadImage (String text){
-        Image newImage = new Image(getClass().getClassLoader()
-                                   .getResourceAsStream("images/play.png"));
-        if(text.equals("PLAY")){
-         newImage = new Image(getClass().getClassLoader()
-                                     .getResourceAsStream("images/play.png"));
-        }
-        else if(text.equals("PAUSE")){
-             newImage = new Image(getClass().getClassLoader()
-                                       .getResourceAsStream("images/pause.png"));
-        }
-        else if(text.equals("STOP")){
-             newImage = new Image(getClass().getClassLoader()
-                                       .getResourceAsStream("images/stop.png"));
-        }
-        else{
-        }
-        ImageView imgV = new ImageView(newImage);
+    public Button newButton(String text, ImageView imgV, int x, int y){
         imgV.setFitWidth(40);
         imgV.setFitHeight(40);
-        return imgV;
+        Button run = new Button(text, imgV);
+        run.setStyle(overButton);
+        run.setOnMouseEntered(e -> {
+            run.setStyle(buttonFill);
+            backdrop.opacityProperty().setValue(0.8);
+        });
+        run.setOnMouseExited(e -> run.setStyle(overButton));
+        run.setTranslateX(x);
+        run.setTranslateY(y);
+        return run;
     }
 
     private void helpHandler(){

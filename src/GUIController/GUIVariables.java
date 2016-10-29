@@ -46,6 +46,9 @@ public class GUIVariables implements Variables {
     private String buttonFill = "-fx-background-color: linear-gradient(#00110e, #0079b3);" +
             "-fx-background-radius: 20;" +
             "-fx-text-fill: white;";
+    private String textFieldFill = "-fx-background-color: linear-gradient(#00110e, #4d66cc);" +
+            "-fx-background-radius: 20;" +
+            "-fx-text-fill: white;";
 
     /**
      *
@@ -174,15 +177,17 @@ public class GUIVariables implements Variables {
 
     private void addVariableManually(){
         final TextField addFirstName = new TextField();
-        addFirstName.setPromptText("Variable name");
+        addFirstName.setPromptText("Enter variable name");
         addFirstName.setMaxWidth(variableNameCol.getPrefWidth() - 30);
         addFirstName.setTranslateX(50);
         addFirstName.setTranslateY(310);
+        addFirstName.setStyle(textFieldFill);
         final TextField addLastName = new TextField();
         addLastName.setMaxWidth(valueCol.getPrefWidth() - 30);
-        addLastName.setPromptText("Variable value");
+        addLastName.setPromptText("Enter variable value");
         addLastName.setTranslateX(300);
         addLastName.setTranslateY(310);
+        addLastName.setStyle(textFieldFill);
         final TextField addEmail = new TextField();
 
         Image newImage = new Image(getClass().getClassLoader()
