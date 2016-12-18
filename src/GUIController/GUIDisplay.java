@@ -458,4 +458,14 @@ public class GUIDisplay implements Display {
             return (int) slider.getValue();
         }
     }
+
+    
+	public void stamp(double imageIndex) {
+		// TODO Front end will draw a stamp with the imageIndex when this is called
+		//Also will add it to the list of imageViews that contain all the stamps
+	}
+
+	public void clearStamps() {
+		// TODO Removes all the stamps from the list of imageViews of stamps they have
+	}
 }
