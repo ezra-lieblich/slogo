@@ -1,0 +1,2 @@
+to lol [ :a :b ] [ sum :a :b ]
+> 
