@@ -4,6 +4,7 @@ import BackEndCommands.DisplayCommand;
 import BackEndInterpreter.ParseTreeNode;
 
 /**
+ * Gets the current image index of the turtle
  * @author ezra
  */
 public class Shape extends DisplayCommand {
@@ -11,6 +12,7 @@ public class Shape extends DisplayCommand {
 
     /**
      * Gets the Image index from the display
+     * Returns the current image index
      */
     @Override
     public double executeCommand(ParseTreeNode node) {

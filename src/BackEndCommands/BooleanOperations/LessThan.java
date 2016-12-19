@@ -17,6 +17,11 @@ public class LessThan implements Command {
         return;
     }
 
+    /**
+     * Executes its two children and returns 1 if the first value is
+     * less, 0 otherwise
+     * @param node The current node
+     */
     @Override
     public double executeCommand(ParseTreeNode node) {
         ParseTreeNode arg1 = node.getChild(0);

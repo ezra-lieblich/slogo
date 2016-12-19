@@ -34,7 +34,8 @@ public class GUIConsole implements Console{
     private NodeFactory myFactory = new NodeFactory();
 
     /**
-     *
+     * This makes a new GUIConsole which contains the output of any commands that the
+     * user inputs into the editor. 
      * @param p
      * @param borderColor
      */

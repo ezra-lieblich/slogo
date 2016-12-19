@@ -28,12 +28,8 @@ public abstract class TurtleCommand implements Command {
     }
 
     @Override
-    public double executeCommand(ParseTreeNode node) {
-        return 0;
-    }
+    public abstract double executeCommand(ParseTreeNode node);
 
     @Override
-    public int numArguments() {
-        return 0;
-    }
+    public abstract int numArguments();
 }

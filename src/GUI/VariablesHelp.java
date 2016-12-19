@@ -10,11 +10,12 @@ import javafx.stage.Stage;
  * Created by Delia on 10/23/2016.
  */
 public class VariablesHelp extends HelpMenu {
-    private String instructions = "Start by entering a command in the editor that \n\tdeclares a variable. "+
-            "\nAll commands with variables that have been run will show \n\tup as buttons in the History box." +
-            "\nClick on a variable's name or value to edit it." +
-            "\nPress the Apply button in the top to apply your changes." +
-            "\nPress the Clear button in the History box to clear history.";
+    private String instructions = "Start by entering a command in the editor that " +
+            "\n\tdeclares a variable. A command like \n\t\t\t> make :x 10 " +
+            "\n\tsets the variable x equal to 10."+
+            "\nTo add a variable manually or edit an existing variable, " +
+            "\n\ttype it in the text fields and click \"Add\"." +
+            "\nPress the Clear button in the Variables box to clear the table.";
 
     /**
      *

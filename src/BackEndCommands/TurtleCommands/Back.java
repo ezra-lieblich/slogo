@@ -19,8 +19,6 @@ public class Back extends TurtleCommand {
     @Override
     public double executeCommand(ParseTreeNode node) {
         ParseTreeNode arg1 = node.getChild(0);
-        //double value1 = arg1.executeCommand(arg1);
-        //TODO need to rename these methods
         double x = properties.calculateXDistance(arg1, false);
         double y = properties.calculateYDistance(arg1, false);
         properties.setNewLineProperty(true);

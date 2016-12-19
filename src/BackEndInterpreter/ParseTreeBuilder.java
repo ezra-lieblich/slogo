@@ -22,13 +22,14 @@ import java.util.*;
 
 /**
  * @author Robert Steilberg
+ * @author ezra
  *         <p>
  *         This class builds a parse tree of a specified Logo commandType. This is done
  *         by reducing the Logo commandType down into its subparts and then recursively
  *         building a tree where each tree node is a irreducible Logo commandType.
  *         <p>
  *         Dependencies: Command classes, CommandTypeDetector, LogoMethod, Mappings,
- *         ObservableProperties, ParseTreeNode, ListBuilder, GroupBuilder, MethodCaller
+ *         ObservableProperties, ParseTreeNode, MethodCaller, ListBuilder, GroupBuilder
  */
 public class ParseTreeBuilder {
 

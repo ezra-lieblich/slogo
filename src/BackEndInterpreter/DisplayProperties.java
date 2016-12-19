@@ -8,6 +8,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 /**
+ * Properties class that contains properties for the GUI Display to update with. Calls methods in GUIDisplay
+ * and is accessed by the DisplayCommands
  * @author ezra
  */
 public class DisplayProperties {
@@ -44,23 +46,52 @@ public class DisplayProperties {
 		return penColor.get();
 	}
 	
+	/**
+	 * 
+	 * @param value pen color index to set in the front end 
+	 */
 	public void setPenColor(double value) {
 		penColor.set(value);
 	}
 	
+	/**
+	 * 
+	 * @param value The new pen width size
+	 */
 	public void setPenSize(double value) {
 		penSize.set(value);
 	}
 	
+	/**
+	 * 
+	 * @return The image shape index
+	 */
 	public double getImageIndex() {
 		return imageIndex.get();
 	}
+	
+	/**
+	 * 
+	 * @param value The new shape index
+	 */
 	public void setImageIndex(double value) {
 		imageIndex.set(value);
 	}
+	
+	/**
+	 * 
+	 * @param value The new background color index
+	 */
 	public void setBackgroundImage(double value) {
 		backgroundImage.set(value);
 	}
+	
+	/**
+	 * Creates a new palette for the background color to be set to
+	 * @param r
+	 * @param g
+	 * @param b
+	 */
 	public void setPallete(double r, double g, double b) {
 		RGB palette = new RGB(r, g, b);
 		paletteIndex = new SimpleObjectProperty<>(palette);

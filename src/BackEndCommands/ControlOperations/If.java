@@ -4,7 +4,8 @@ import BackEndCommands.ControlCommand;
 import BackEndInterpreter.ParseTreeNode;
 
 /**
- * @author Robert Steilberg
+ * @author Robert H. Steilberg II
+ * @author ezra
  *         <p>
  *         This command instance represents an If statement in Logo.
  */
@@ -12,6 +13,9 @@ public class If extends ControlCommand {
 
     private static final int ARGS = 2;
 
+    /**
+     * Runs the commands specified in the second child if the first child does not equal zero
+     */
     @Override
     public double executeCommand(ParseTreeNode node) {
     	ParseTreeNode condition = node.getChild(0);

@@ -4,6 +4,7 @@ import BackEndCommands.DisplayCommand;
 import BackEndInterpreter.ParseTreeNode;
 
 /**
+ * Sets the pen size of the lines
  * @author ezra
  */
 public class SetPenSize extends DisplayCommand {
@@ -11,6 +12,7 @@ public class SetPenSize extends DisplayCommand {
 
     /**
      * Sets the pen size of the display
+     * Returns the size
      */
     @Override
     public double executeCommand(ParseTreeNode node) {

@@ -20,6 +20,9 @@ public class DisplayMappings {
 	private static ResourceBundle resources;
 
 	
+	/**
+	 * Populates the maps and uses the ImageMappings.properties to get corresponding values
+	 */
 	public DisplayMappings() {
 		resources =  ResourceBundle.getBundle("resources/internal/ImageMappings");
 		penColorMappings = setupColors();
@@ -33,7 +36,6 @@ public class DisplayMappings {
 	}
 
 	private void setupTurtleImage() {
-		// TODO Auto-generated method stub
 		turtleImageMappings = new ArrayList<Image>();		
 		turtleImageMappings.add(new Image(getClass().getClassLoader()
 											.getResourceAsStream(resources.getString("image0"))));
@@ -59,6 +61,11 @@ public class DisplayMappings {
 		return list;
 	}
 	
+	/**
+	 * This gets the pen color in use in the GUI. 
+	 * @param i
+	 * @return
+	 */
 	public Color getPenColor(int i) {
 		if(i >= penColorMappings.size()) {
 			return penColorMappings.get(0);
@@ -68,6 +75,11 @@ public class DisplayMappings {
 		}
 	}
 	
+	/**
+	 * This gets the turtle image in use in the GUI. 
+	 * @param i
+	 * @return
+	 */
 	public Image getTurtleImage(int i) {
 		if(i >= turtleImageMappings.size()) {
 			return turtleImageMappings.get(0);
@@ -77,6 +89,11 @@ public class DisplayMappings {
 		}
 	}
 	
+	/**
+	 * This gets the background color in use in the GUI. 
+	 * @param i
+	 * @return
+	 */
 	public Color getBackgroundColor(int i) {
 		if(i >= backgroundImageMappings.size()) {
 			return backgroundImageMappings.get(0);

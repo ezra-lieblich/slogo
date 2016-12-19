@@ -4,13 +4,15 @@ import BackEndCommands.DisplayCommand;
 import BackEndInterpreter.ParseTreeNode;
 
 /**
+ * Changes the background color display to the color and RGB palette specified
  * @author ezra
  */
 public class SetPalette extends DisplayCommand {
     private static final int ARGS = 4;
 
     /**
-     * Sets the pen color of the display
+     * Sets the color of the background to the first child. Then changes the palette to the RGB values
+     * of the second third and fourth child
      */
     @Override
     public double executeCommand(ParseTreeNode node) {

@@ -12,6 +12,10 @@ public class For extends ControlCommand {
 
     private static final int ARGS = 2;
 
+    /**
+     * Runs the commands specified in the nodes second child. Runs that based off of the
+     * increment, start, and end the user specifies. Also updates a variable specified.
+     */
     @Override
     public double executeCommand(ParseTreeNode node) {
         ParseTreeNode parameters = node.getChild(0);

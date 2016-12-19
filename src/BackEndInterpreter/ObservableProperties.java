@@ -1,3 +1,5 @@
+//Line 17 is part of my masterpiece as it also implements FrontendObservableProperties
+//Ezra Lieblich
 package BackEndInterpreter;
 
 import GUIController.GUIDisplay;
@@ -13,9 +15,9 @@ import javafx.scene.image.ImageView;
  *
  * @author ezra
  */
-public class ObservableProperties implements ObservableManager {
+public class ObservableProperties implements ObservableManager, FrontendObservableProperties {
     private double myId;
-    private BooleanProperty imageVisibleProperty; //observable list of booleans changes https://docs.oracle.com/javase/8/javafx/api/javafx/collections/ListChangeListener.Change.html
+    private BooleanProperty imageVisibleProperty; 
     private DoubleProperty rotateProperty;
     private double xProperty;
     private double yProperty;
@@ -24,6 +26,12 @@ public class ObservableProperties implements ObservableManager {
     private BooleanProperty clearScreenProperty;
 
 
+    /**
+     * Creates all the ObservableProperties and also sets up the change Listeners. Also uses binding for the visibleProperty and rotateProperty
+     * @param turtle ImageView to bind properties. NOTE, this is only used as constructor and not instantiated 
+     * @param myDisplay display so listeners can call methods in the display. NOTE, Display is not instance variable and is only used to setupListeners
+     * @param id Id of the turtle that is created
+     */
     public ObservableProperties(ImageView turtle, GUIDisplay myDisplay, double id) {
         myId = id;
         imageVisibleProperty = new SimpleBooleanProperty(true);
@@ -38,6 +46,10 @@ public class ObservableProperties implements ObservableManager {
         setupListeners(myDisplay);
     }
 
+    /**
+     * Creates listeners and calls corresponding FrontEnd methods
+     * @param myDisplay Display that contains methods that listeners need to call
+     */
     private void setupListeners(GUIDisplay myDisplay) {
         newLineProperty.addListener((observable, oldValue, newValue) -> {
             //If new value is true we need to draw a new line
@@ -46,9 +58,7 @@ public class ObservableProperties implements ObservableManager {
             }
             newLineProperty.set(false);
         });
-
         pathVisibleProperty.addListener((observable, oldValue, newValue) -> myDisplay.setVisibility(newValue, myId));
-
         clearScreenProperty.addListener((observable, oldValue, newValue) -> {
             //If new value is true we need to draw a new line
             if (newValue) {
@@ -58,40 +68,58 @@ public class ObservableProperties implements ObservableManager {
         });
     }
 
+    /**
+     * Gets boolean whether turtle is visible or not
+     */
     public boolean getImageVisibleProperty() {
         return imageVisibleProperty.get();
     }
 
+    /**
+     * Gets the double of the turtle's rotate property
+     */
     public double getRotateProperty() {
         return rotateProperty.get();
     }
 
+    /**
+     * Gets the XProperty of the turtle
+     */
     public double getXProperty() {
         return xProperty;
     }
 
+    /**
+     * Sets the XProperty of the turtle
+     */
     public void setXProperty(double value) {
         xProperty = value;
     }
 
+    /**
+     * Gets the yProperty of the turtle
+     */
     public double getYProperty() {
         return yProperty;
     }
 
+    /**
+     * Sets the yProperty of the turtle
+     */
     public void setYProperty(double value) {
         yProperty = value;
     }
 
+    /**
+     * Gets the boolean whether turtle's path is visible or not
+     */
     public boolean getPathVisibleProperty() {
         return pathVisibleProperty.get();
     }
 
     /**
-     * Calculates the distance between two points. Method is called by the Home, ClearScreen, SetXY commands
-     *
-     * @param x2
+     * Calculates the distance x, y point given and current position. Method is called by the Home, ClearScreen, SetXY commands
      * @param x1
-     * @param y2
      * @param y1
      * @return The distance between two points
      */
@@ -101,7 +129,7 @@ public class ObservableProperties implements ObservableManager {
 
     /**
      * Calculates the X distance the turtle travels when it moves. Called by forward and back commands
-     *
+     * Also negates the value depending on whether it is a forward or backward command
      * @param hyp Distance of the hypotenuse
      * @return X distance traveled
      */
@@ -112,14 +140,13 @@ public class ObservableProperties implements ObservableManager {
         }
         double angle = getRotateProperty();
         double answer = Math.sin(Math.toRadians(angle)) * value;
-        //Second and fourth quadrant are actually flipped so you need to multiply by negative one
         return answer;
     }
 
     /**
      * Calculates the Y distance the turtle travels when it moves. Called by the forward and back commands
-     *
-     * @param hyp
+     * Also negates the value depending on whether it is a forward or backward command
+     * @param hyp Distance of the hypotenuse
      * @return Y distance traveled
      */
     public double calculateYDistance(ParseTreeNode hyp, boolean sign) {
@@ -132,22 +159,37 @@ public class ObservableProperties implements ObservableManager {
         return answer;
     }
 
+    /**
+     * Sets the NewLineProperty of the turtle to the value specified
+     */
     @Override
     public void setNewLineProperty(boolean value) {
         newLineProperty.set(value);
     }
 
+    /**
+     * Sets the clearScreenProperty of the turtle to the value specified
+     */
     @Override
     public void setClearScreenProperty(boolean value) {
         clearScreenProperty.set(value);
         rotateProperty.set(0);
     }
 
+    /**
+     * Sets the imageVisibleProperty of the turtle to the value specified
+     */
     @Override
     public void setImageVisibleProperty(boolean value) {
         imageVisibleProperty.set(value);
     }
 
+    /**
+     * Sets the rotateProperty to value specified by the node.
+     * @param node Value to rotate
+     * @param isAbsolute Determines whether we rotate just by value specified or add based off current pos
+     * @param sign Determines whether we rotate clockwise or counterclockwise from current heading
+     */
     @Override
     public double setRotateProperty(ParseTreeNode node, boolean isAbsolute, boolean sign) {
         double value = node.executeCommand(node);
@@ -164,19 +206,39 @@ public class ObservableProperties implements ObservableManager {
         return Math.abs(value);
     }
 
+    /**
+     * Sets the PathVisibleProperty of the turtle to value given
+     */
     @Override
     public void setPathVisibleProperty(boolean value) {
         pathVisibleProperty.set(value);
     }
 
+    /**
+     * Called by the Towards the command
+     * Calculates the degrees from the origin of the two nodes specified and sets the rotate property to that 
+     * @param node1 the X value
+     * @param node2 The Y value
+     * @return the Degrees moved
+     */
     @Override
     public double calculateDegrees(ParseTreeNode node1, ParseTreeNode node2) {
         double x = node1.executeCommand(node1);
         double y = node2.executeCommand(node2);
-        double answer;
         double angle = Math.atan(x / y);
-        angle = Math.toDegrees(angle);
-        // Second quadrant
+        double answer = adjustAngleQuadrant(x, y, Math.toDegrees(angle));
+        double oldDegrees = rotateProperty.get();
+        rotateProperty.set(answer);
+        return Math.abs(answer - oldDegrees);
+    }
+
+    /**
+     * Adjusts the angle depending on the quadrant the coordinate is
+     * @return The actual angle to set the turtle
+     */
+    private double adjustAngleQuadrant(double x, double y, double angle) {
+        double answer;
+    	 // Second quadrant
         if (x > 0 && y < 0) {
             answer = 90 - angle;
         }
@@ -192,15 +254,21 @@ public class ObservableProperties implements ObservableManager {
         else {
             answer = angle;
         }
-        double oldDegrees = rotateProperty.get();
-        rotateProperty.set(answer);
-        return Math.abs(answer - oldDegrees);
+        return answer;
     }
-
+    /**
+     * @return the id of the turtle
+     */
     public double getID() {
         return myId;
     }
 
+    /**
+     * Sets the x and y Property to the coordinates specified
+     * @param arg1 The value is xCord
+     * @param arg2 The value is yCord
+     * @return the Distance traveled 
+     */
     @Override
     public double setXY(ParseTreeNode arg1, ParseTreeNode arg2) {
         double value1 = arg1.executeCommand(arg1);

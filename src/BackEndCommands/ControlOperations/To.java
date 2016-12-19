@@ -6,6 +6,7 @@ import BackEndInterpreter.ParseTreeNode;
 
 /**
  * @author Robert Steilberg
+ * @author ezra
  *         <p>
  *         This command instance represents a method assignment statement in Logo.
  */
@@ -13,6 +14,11 @@ public class To extends ControlCommand {
 
     private static final int ARGS = 3;
 
+    /**
+     * Creates a method with the first child being the name of the command
+     * Adds method variables to the method class to store
+     * Saves the body which is the third child.
+     */
     @Override
     public double executeCommand(ParseTreeNode node) {
     	ParseTreeNode commandName = node.getChild(0);

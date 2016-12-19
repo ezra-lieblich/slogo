@@ -1,10 +1,4 @@
 package GUI;
-
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -15,8 +9,11 @@ import javafx.stage.Stage;
  * Created by Delia on 10/22/2016.
  */
 public class EditorHelp extends HelpMenu {
-    private String instructions = "Start by clicking on the text field and type an instruction \nin the editor. "+
-        "\nPress the Run button to start the execution.";
+    private String instructions = "Start by clicking on the text area and type an instruction \nin the editor. "+
+            "\nPress the \"Run\" button to start the execution." +
+            "\nPress the \"Clear\" button to clear the editor." +
+            "\nPress the \"Open file\" button to load a file from your local \n\tdirectory." +
+            "\nPress the \"Save file\" button to save your current code as \n\ta text file in your local directory.";
 
     /**
      *

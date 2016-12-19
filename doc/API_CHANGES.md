@@ -209,11 +209,16 @@ public interface ParseTree {
  * getCommandObj() uses reflection to get the Command object associated with a specified command
  * getCommandType() determines the type of a specified command (such as if it is a variable, etc.)
 * The ObservableProperties class was created to handle observable data structures for passing data between the front and back end
- * There are public getters for all of the properties associated with the display
+ * There are public getters for all of the properties associated with the display as both the individual command and
+ frontend need to set and get values of an individual turtle
+ *ObservableManager contains public methods such as calculateDegrees, calculateTotalDistance, calculateXDistance,
+  calculateYDistance, and setXY as these methods need to be accessed by TurtleCommands and need properties
 * The ParseTreeNode class holds information about nodes in the tree of commands
  * There are public getters and setters for all of the properties associated with a ParseTreeNode
 * The TurtleCommand class has a public setPropties() method for binding turtle properties with the front end
 * The ControlCommand class has a public setVariables() method for executing MakeVariable and To kinds of instructions
+*And RGB class was created with getters on r, g ,b values so front end can easily access values specified by the back end
+
 
 ##Front end internal:
 Currently, we have
@@ -420,4 +425,5 @@ public void initIDE();
 ```
 Which was the same.
 
-
+* A class called DisplayMappings was created to link backend and frontend display mapping changes.
+Getters were created by for all the list of mappings in order for frontend to access actual value associated with index

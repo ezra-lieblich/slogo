@@ -4,6 +4,7 @@ import BackEndCommands.DisplayCommand;
 import BackEndInterpreter.ParseTreeNode;
 
 /**
+ * Changes the image of the turtle in the front end
  * @author ezra
  */
 public class SetShape extends DisplayCommand {
@@ -11,6 +12,7 @@ public class SetShape extends DisplayCommand {
 
     /**
      * Sets the image of the turtle
+     * Returns the image index
      */
     @Override
     public double executeCommand(ParseTreeNode node) {

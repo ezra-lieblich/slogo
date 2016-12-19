@@ -5,6 +5,7 @@ import BackEndInterpreter.ParseTreeNode;
 
 /**
  * @author Robert Steilberg
+ * @author ezra
  *         <p>
  *         This command instance represents a Repeat statement in Logo.
  */
@@ -12,6 +13,9 @@ public class Repeat extends ControlCommand {
     private static final int ARGS = 2;
     private static final String REPCOUNT_VARNAME = ":repcount";
 
+    /**
+     * Repeats the command specified in the second child by the first child's value
+     */
     @Override
     public double executeCommand(ParseTreeNode node) {
         ParseTreeNode limitNode = node.getChild(0);

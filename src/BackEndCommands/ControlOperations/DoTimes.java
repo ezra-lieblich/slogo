@@ -5,6 +5,7 @@ import BackEndInterpreter.ParseTreeNode;
 
 /**
  * @author Robert Steilberg
+ * @author ezra
  *         <p>
  *         This command instance represents a DoTimes statement in Logo.
  */
@@ -12,6 +13,10 @@ public class DoTimes extends ControlCommand {
 
     private static final int ARGS = 2;
 
+    /**
+     * Runs the commands in the second children by the amount specified in the first child's second child.
+     * Also updates the specified variable which is the first child's first child
+     */
     @Override
     public double executeCommand(ParseTreeNode node) {
         ParseTreeNode varNode = node.getChild(0).getChild(0);

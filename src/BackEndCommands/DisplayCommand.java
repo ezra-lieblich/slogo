@@ -18,7 +18,7 @@ public abstract class DisplayCommand implements Command {
     protected DisplayProperties properties;
 
     /**
-     * Sets the properties file in the class.
+     * Sets the properties for display commands file in the class.
      *
      * @param o is the object to set
      */
@@ -30,14 +30,8 @@ public abstract class DisplayCommand implements Command {
     }
 
     @Override
-    public double executeCommand(ParseTreeNode node) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+    public abstract double executeCommand(ParseTreeNode node);
 
     @Override
-    public int numArguments() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+    public abstract int numArguments();
 }

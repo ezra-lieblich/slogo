@@ -62,7 +62,6 @@ places such as the NodeFactory.java class and various other superclasses like th
     duplicated code were removed. The Turtle.java class made creating multiple turtles and changing user preferences in the display very easy.
 
 ##Assumptions or decisions made
-* To resolve issues with commands issued over multiple lines (i.e. a list that spans multiple lines), we decided to sanitize inputted
-commands after being issued from the GUI such that they are all placed on one line and executed sequentially. To achieve this, we put all of
-the commands in one big list, thus assuming that the user will be satisfied from always getting a single return value after pressing the
-"run" button.
+
+* To resolve issues with commands issued over multiple lines (i.e. a list that spans multiple lines), we decided to sanitize inputted commands after being issued from the GUI such that they are all placed on one line and executed sequentially. To achieve this, we put all of the commands in one big list, thus assuming that the user will be satisfied from always getting a single return value after pressing the "run" button.
+

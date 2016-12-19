@@ -5,6 +5,7 @@ import BackEndInterpreter.ParseTreeNode;
 
 /**
  * @author Robert Steilberg
+ * @author ezra
  *         <p>
  *         This command instance represents a constant in Logo.
  */

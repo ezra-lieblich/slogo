@@ -18,7 +18,7 @@ public class Random implements Command {
     }
 
     /**
-     * Returns a random double between zero and argument specifiec
+     * Returns a random double between zero and argument specified
      */
     @Override
     public double executeCommand(ParseTreeNode node) {

@@ -1,6 +1,8 @@
 package BackEndInterface;
 
 /**
+ * Class for Palette Command. Creates a simple class so the frontend can easily access the value when this is
+ * passed from the backend to the frontend
  * @author ezra
  */
 public class RGB {
@@ -26,6 +28,11 @@ public class RGB {
 		return blue;
 	}
 	
+	/**
+	 * Checks if the value specified is in bounds and sets it to default value if it violates limit. Otherwise sets it
+	 * @param value
+	 * @return 
+	 */
 	private double checkBounds(double value) {
 		double answer = value;
 		if (answer < 0 || answer > 256) {
