@@ -23,8 +23,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import BackEndInterface.RGB;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 /**
  * Created by Delia on 10/15/2016.
  */
@@ -48,6 +51,8 @@ public class GUIDisplay implements Display {
     private DisplayMenu myOptions = new DisplayMenu(s);
     private DisplayMappings displayMappings = new DisplayMappings();
     private NodeFactory myFactory = new NodeFactory();
+
+    
     /**
      * Creates a new GUIDisplay that contains all the necessary parts of the SLogo IDE.
      * @param p
@@ -97,10 +102,34 @@ public class GUIDisplay implements Display {
         return turtleProperty;
     }
     
-    private void togglePen(double newID) {
-        myTurtles.get(newID).setVisibility(!myTurtles.get(newID).isVisible());
-        myTurtles.get(newID).getProperties()
-                .setPathVisibleProperty(myTurtles.get(newID).isVisible());
+    private void togglePen(double newID){
+        
+        int r = (int) (Math.random()*5);
+        String imgStr = new String();
+        if(r == 1){
+            imgStr = "Images/drake.png";
+        }
+        else if(r == 2){
+            imgStr = "Images/heart.png";
+        }
+        else if(r == 3){
+            imgStr = "Images/robby.png";
+             }
+        else if(r == 4){
+            imgStr = "Images/duvall.png";
+             }
+        else if(r == 5 || r == 0){
+                imgStr = "Images/turtle.png";
+             }
+        else
+        {
+          
+        }
+
+        
+        Image newImg = new Image(getClass().getClassLoader()
+                                 .getResourceAsStream(imgStr));
+        myTurtles.get(newID).setImage(newImg);
     }
     
     private void makeTooltip(double newID) {
