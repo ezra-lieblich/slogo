@@ -1,6 +1,8 @@
 package GUIController;
 import BackEndInterpreter.FrontendObservableProperties;
 import java.util.ArrayList;
+
+import BackEndInterpreter.ObservableProperties;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Line;
@@ -14,9 +16,14 @@ public class Turtle {
     private double id;
     private boolean visibility = true;
     private List<Line> turtleMotion = new ArrayList<>();
-    private ObservableProperties properties;
+    private FrontendObservableProperties properties;
 
-    public Turtle(ObservableProperties newProperty, ImageView myImage) {
+//    public Turtle(ObservableProperties newProperty, ImageView myImage) {
+//        turtleView = myImage;
+//        properties = newProperty;
+//    }
+
+    public Turtle(FrontendObservableProperties newProperty, ImageView myImage) {
         turtleView = myImage;
         properties = newProperty;
     }
@@ -85,7 +92,7 @@ public class Turtle {
      * This returns the observable properties of the turtle. 
      * @return
      */
-    public ObservableProperties getProperties(){
+    public FrontendObservableProperties getProperties(){
         return properties;
     }
 

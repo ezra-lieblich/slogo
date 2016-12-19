@@ -1,6 +1,7 @@
 // This is part of my masterpiece line 92 and 93
 //Ezra Lieblich
 package GUIController;
+
 import BackEndInterpreter.FrontendObservableProperties;
 import BackEndInterpreter.ObservableProperties;
 import Base.NodeFactory;
@@ -24,8 +25,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import BackEndInterface.RGB;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+
 /**
  * Created by Delia on 10/15/2016.
  */
@@ -49,8 +52,10 @@ public class GUIDisplay implements Display {
     private DisplayMenu myOptions = new DisplayMenu(s);
     private DisplayMappings displayMappings = new DisplayMappings();
     private NodeFactory myFactory = new NodeFactory();
+
     /**
      * Creates a new GUIDisplay that contains all the necessary parts of the SLogo IDE.
+     *
      * @param p
      * @param turtle
      * @param pathColor
@@ -65,7 +70,7 @@ public class GUIDisplay implements Display {
         addTextLabel();
         addHelpButton();
     }
-    
+
     private void drawDisplay() {
         Image newImg = new Image(getClass().getClassLoader()
                 .getResourceAsStream("Images/graphPaper.gif"));
@@ -79,9 +84,9 @@ public class GUIDisplay implements Display {
         displayGraph.setEffect(colorAdjust);
         window.getChildren().add(displayGraph);
     }
-    
+
     @Override
-    public ObservableProperties addTurtle(double newID){
+    public ObservableProperties addTurtle(double newID) {
         ImageView newTurtleImg = new ImageView();
         newTurtleImg.setImage(myTurtle.getImage());
         newTurtleImg.setTranslateX(GRAPH_X_POS + (GRAPH_WIDTH / 2));
@@ -89,7 +94,7 @@ public class GUIDisplay implements Display {
         newTurtleImg.setFitHeight(TURTLE_FIT_SIZE);
         newTurtleImg.setFitWidth(TURTLE_FIT_SIZE);
         ObservableProperties turtleProperty = new ObservableProperties(newTurtleImg, this, newID);
-        Turtle newTurtle = new Turtle((FrontendObservableProperties)turtleProperty, newTurtleImg);
+        Turtle newTurtle = new Turtle((FrontendObservableProperties) turtleProperty, newTurtleImg);
         newTurtle.setID(newID);
         myTurtles.put(newID, newTurtle);
         makeTooltip(newID);
@@ -97,13 +102,13 @@ public class GUIDisplay implements Display {
         myTurtles.get(newID).getImage().setOnMouseClicked(e -> togglePen(newID));
         return turtleProperty;
     }
-    
+
     private void togglePen(double newID) {
         myTurtles.get(newID).setVisibility(!myTurtles.get(newID).isVisible());
         myTurtles.get(newID).getProperties()
                 .setPathVisibleProperty(myTurtles.get(newID).isVisible());
     }
-    
+
     private void makeTooltip(double newID) {
         Tooltip t = new Tooltip("X: " + myTurtles.get(newID).getProperties().getXProperty()
                 + "\n" + "Y: " + myTurtles.get(newID).getProperties().getYProperty() + "\n"
@@ -111,25 +116,30 @@ public class GUIDisplay implements Display {
                 + "Turtle ID: " + newID);
         Tooltip.install(myTurtles.get(newID).getImage(), t);
     }
+
     private void addTextLabel() {
         Text label = myFactory.makeTitle("Display", 630, 130);
         window.getChildren().add(label);
     }
+
     private void addHelpButton() {
         helpButton = myFactory.makeHelpButton(displayGraph.getTranslateX() + displayGraph.getFitWidth() - 30,
                 displayGraph.getTranslateY() + 10);
         helpButton.setOnMouseClicked(e -> helpHandler());
         window.getChildren().add(helpButton);
     }
+
     private void helpHandler() {
         Stage s = new Stage();
         helpWindow = new DisplayHelp(s);
         helpWindow.init();
     }
+
     @Override
     public void bindNodes(ReadOnlyDoubleProperty width) {
         helpButton.translateXProperty().bind(width.subtract(50));
     }
+
     @Override
     public void moveTurtle(double x, double y, double id) {
         numSteps++;
@@ -153,14 +163,15 @@ public class GUIDisplay implements Display {
             out = true;
         if (out)
             window.getChildren().remove(myTurtles.get(id).getImage());
-        else if(!window.getChildren().contains(myTurtles.get(id).getImage()))
+        else if (!window.getChildren().contains(myTurtles.get(id).getImage()))
             window.getChildren().add(myTurtles.get(id).getImage());
     }
-    private void drawNewLine(double x, double y, double id){
+
+    private void drawNewLine(double x, double y, double id) {
         double xDest = myTurtles.get(id).getImage().getTranslateX() + x + 20;
         double yDest = myTurtles.get(id).getImage().getTranslateY() - y + 20;
-        double xFrom =  myTurtles.get(id).getImage().getTranslateX() +  myTurtles.get(id).getImage().getX() + 20;
-        double yFrom =  myTurtles.get(id).getImage().getTranslateY() +  myTurtles.get(id).getImage().getY() + 20;
+        double xFrom = myTurtles.get(id).getImage().getTranslateX() + myTurtles.get(id).getImage().getX() + 20;
+        double yFrom = myTurtles.get(id).getImage().getTranslateY() + myTurtles.get(id).getImage().getY() + 20;
         boolean fullyOut = false;
         boolean destOut = (xDest < displayGraph.getTranslateX()
                 || xDest > displayGraph.getTranslateX() + displayGraph.getFitWidth())
@@ -170,31 +181,31 @@ public class GUIDisplay implements Display {
                 || xFrom > displayGraph.getTranslateX() + displayGraph.getFitWidth())
                 || (yFrom < displayGraph.getTranslateY()
                 || yFrom > displayGraph.getTranslateY() + displayGraph.getFitHeight());
-        if (destOut && originOut){
+        if (destOut && originOut) {
             fullyOut = true;
         }
-        if (yDest < displayGraph.getTranslateY()){
+        if (yDest < displayGraph.getTranslateY()) {
             yDest = displayGraph.getTranslateY();
         }
-        if (yDest > displayGraph.getTranslateY() + displayGraph.getFitHeight()){
+        if (yDest > displayGraph.getTranslateY() + displayGraph.getFitHeight()) {
             yDest = displayGraph.getTranslateY() + displayGraph.getFitHeight();
         }
-        if (xDest < displayGraph.getTranslateX()){
+        if (xDest < displayGraph.getTranslateX()) {
             xDest = displayGraph.getTranslateX();
         }
-        if (xDest > displayGraph.getTranslateX() + displayGraph.getFitWidth()){
+        if (xDest > displayGraph.getTranslateX() + displayGraph.getFitWidth()) {
             xDest = displayGraph.getTranslateX() + displayGraph.getFitWidth();
         }
-        if (yFrom < displayGraph.getTranslateY()){
+        if (yFrom < displayGraph.getTranslateY()) {
             yFrom = displayGraph.getTranslateY();
         }
-        if (yFrom > displayGraph.getTranslateY() + displayGraph.getFitHeight()){
+        if (yFrom > displayGraph.getTranslateY() + displayGraph.getFitHeight()) {
             yFrom = displayGraph.getTranslateY() + displayGraph.getFitHeight();
         }
-        if (xFrom < displayGraph.getTranslateX()){
+        if (xFrom < displayGraph.getTranslateX()) {
             xFrom = displayGraph.getTranslateX();
         }
-        if (xFrom > displayGraph.getTranslateX() + displayGraph.getFitWidth()){
+        if (xFrom > displayGraph.getTranslateX() + displayGraph.getFitWidth()) {
             xFrom = displayGraph.getTranslateX() + displayGraph.getFitWidth();
         }
         Line newLine = new Line(xFrom, yFrom, xDest, yDest);
@@ -207,16 +218,17 @@ public class GUIDisplay implements Display {
         newLine.setVisible(myTurtles.get(id).isVisible());
         turtleMotion.add(newLine);
         myTurtles.get(1.0).getLines().add(newLine);
-        if(!fullyOut)
+        if (!fullyOut)
             window.getChildren().add(window.getChildren().size() - 1, newLine);
     }
+
     @Override
     public void clearScreen(double id) {
         window.getChildren().removeAll(myTurtles.get(id).getLines());
         myTurtles.get(id).getLines();
         turtleMotion.clear();
     }
-    
+
     private void addDisplayControlButtons() {
         Button clear = myFactory.makeClearButton(displayGraph.getTranslateX() + 380, 40);
         clear.setOnMouseEntered(e -> clear.setStyle(myFactory.getButtonFill()));
@@ -238,9 +250,23 @@ public class GUIDisplay implements Display {
         Button reset = myFactory.makeButton("Reset", resetImg, 1090, 40);
         reset.setOnMouseEntered(e -> reset.setStyle(myFactory.getButtonFill()));
         reset.setOnMouseClicked(e -> resetIDE());
-        window.getChildren().addAll(clear, optionsButton, reset);
+        newImage = new Image(getClass().getClassLoader()
+                .getResourceAsStream("Images/apply.png"));
+        ImageView imgV = new ImageView(newImage);
+        Button play = myFactory.makeButton("Turtle list", imgV, 20, 40);
+        play.setOnMouseEntered(e -> play.setStyle(myFactory.getButtonFill()));
+        play.setOnMouseClicked(e -> handleTurtleGallery());
+        window.getChildren().addAll(clear, optionsButton, reset, play);
     }
-    
+
+    private void handleTurtleGallery(){
+        TurtleGallery myGallery = new TurtleGallery(myTurtles);
+        Stage turtleGalleryStage = new Stage();
+        Scene galleryScene = new Scene(myGallery.setUpWindow());
+        turtleGalleryStage.setScene(galleryScene);
+        turtleGalleryStage.show();
+    }
+
     private void applyDisplayChanges() {
         pathColor = myOptions.getPenColor().getValue();
         myOptions.setTurtleString();
@@ -252,12 +278,12 @@ public class GUIDisplay implements Display {
         createDisplayShading(myOptions.getDisplayColor());
         strokeWidth = myOptions.getStrokeWidth();
     }
-    
+
     private void createDisplayShading(Color shading) {
         ColorAdjust colorAdjust = myFactory.makeEffect(shading);
         displayGraph.setEffect(colorAdjust);
     }
-    
+
     @Override
     public void resetIDE() {
         window.getChildren().remove(myTurtle);
@@ -277,15 +303,18 @@ public class GUIDisplay implements Display {
         myPath.getStrokeDashArray().clear();
         strokeWidth = 5;
     }
+
     @Override
     public void changePenColor(Double newValue) {
         Color color = displayMappings.getPenColor(newValue.intValue());
         pathColor = color;
     }
+
     @Override
     public void setPenSize(Double newValue) {
         strokeWidth = newValue.intValue();
     }
+
     @Override
     public void changeImage(Double newValue) {
         Image newImg = displayMappings.getTurtleImage(newValue.intValue());
@@ -294,20 +323,24 @@ public class GUIDisplay implements Display {
             turtle.setImage(newImg);
         }
     }
+
     @Override
     public void changePalette(Double newValue) {
         Color color = displayMappings.getBackgroundColor(newValue.intValue());
         createDisplayShading(color);
     }
+
     @Override
     public void changePaletteRGB(RGB newValue) {
         Color color = new Color(newValue.getRed(), newValue.getGreen(), newValue.getBlue(), 1.0);
         createDisplayShading(color);
     }
+
     @Override
     public void setVisibility(boolean isVisible, double newID) {
         myTurtles.get(newID).setVisibility(isVisible);
     }
+
     @Override
     public String getTurtleStr() {
         if (myOptions != null)
@@ -315,29 +348,34 @@ public class GUIDisplay implements Display {
         else
             return null;
     }
+
     @Override
     public Paint getPenColor() {
         return pathColor;
     }
+
     @Override
     public void updateDisplayOptions() {
         myOptions.initPopup();
     }
-    
-    
+
+
     class DisplayMenu extends OptionsMenu {
 
         private static final int DROP_DOWN_X_VALUE = 400;
         private ColorPicker displayColor = new ColorPicker();
         private Slider slider;
+
         /**
-         * Creates a new DisplayMenu by calling the superclass constructor. 
+         * Creates a new DisplayMenu by calling the superclass constructor.
+         *
          * @param s
          */
         public DisplayMenu(Stage s) {
             super(s);
             displayColor.setValue(Color.MIDNIGHTBLUE);
         }
+
         /**
          * Adds all of the required buttons/sliders/choosers to the display
          * by calling a lot of helper methods.
@@ -352,20 +390,20 @@ public class GUIDisplay implements Display {
             changeDisplayColor();
             addPenSizeSlider();
         }
-        
+
         @Override
         public void addTitle() {
             Text title = myFactory.makePopupText(
                     "Select your preferences for the display.", 30, 130, 20);
             getStartWindow().getChildren().add(title);
         }
-        
+
         @Override
         public void addRectangle() {
             Rectangle backdrop = myFactory.makeBlueBackdrop(500, 340, 100, 180);
             getStartWindow().getChildren().add(backdrop);
         }
-        
+
         @Override
         public void addLaunchButton() {
             Button newButton = myFactory.makeBigButton("Apply", 300, 500);
@@ -375,8 +413,8 @@ public class GUIDisplay implements Display {
             });
             getStartWindow().getChildren().add(newButton);
         }
-        
-        private void addPenSizeSlider(){
+
+        private void addPenSizeSlider() {
             slider = new Slider(0, 10, 5);
             slider.setShowTickMarks(true);
             slider.setShowTickLabels(true);
@@ -390,14 +428,16 @@ public class GUIDisplay implements Display {
                     sliderLabel.setText("Choose pen size \t\t" + String.format("%.0f", new_val)));
             getStartWindow().getChildren().addAll(slider, sliderLabel);
         }
-        
+
         @Override
         public void initIDE(String background, String turtle) {
 //nope
         }
+
         /**
          * This method loads a new image to represent the Turtle on the screen
-         * by getting it's information from a resource file.  
+         * by getting it's information from a resource file.
+         *
          * @return newImg
          */
         public Image generateTurtleImage() {
@@ -405,9 +445,10 @@ public class GUIDisplay implements Display {
                     .getResourceAsStream(getTurtleString()));
             return newImg;
         }
+
         /**
-         * This adds a color picker that makes it possible for the user to 
-         * change the color of the display window's background. 
+         * This adds a color picker that makes it possible for the user to
+         * change the color of the display window's background.
          */
         public void changeDisplayColor() {
             displayColor = generateColorPicker(Color.MIDNIGHTBLUE, 400, 400);
@@ -415,6 +456,7 @@ public class GUIDisplay implements Display {
             getStartWindow().getChildren().add(displayColor);
             getStartWindow().getChildren().add(penLabel);
         }
+
         /**
          * This method opens the popup options screen.
          */
@@ -423,15 +465,19 @@ public class GUIDisplay implements Display {
             getStage().setScene(new Scene(setUpWindow()));
             getStage().show();
         }
+
         /**
          * This returns the color of the display background
+         *
          * @return
          */
         public Color getDisplayColor() {
             return displayColor.getValue();
         }
+
         /**
          * This returns the selected width of the pen
+         *
          * @return
          */
         public int getStrokeWidth() {

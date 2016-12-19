@@ -339,15 +339,15 @@ public class GUIManager implements Manager {
                     e1.printStackTrace();
                 }
             });
-            newImage = new Image(getClass().getClassLoader()
-                    .getResourceAsStream("Images/apply.png"));
-            imgV = new ImageView(newImage);
-            Button play = myFactory.makeButton("APPLY", imgV, 20, 40);
-            play.setOnMouseEntered(e -> {
-                play.setStyle(myFactory.getButtonFill());
-                backdrop.opacityProperty().setValue(0.8);
-            });
-            window.getChildren().addAll(save, load, help, play);
+//            newImage = new Image(getClass().getClassLoader()
+//                    .getResourceAsStream("Images/apply.png"));
+//            imgV = new ImageView(newImage);
+//            Button play = myFactory.makeButton("APPLY", imgV, 20, 40);
+//            play.setOnMouseEntered(e -> {
+//                play.setStyle(myFactory.getButtonFill());
+//                backdrop.opacityProperty().setValue(0.8);
+//            });
+            window.getChildren().addAll(save, load, help);//, play);
         }
         private void addComboBoxes() {
             System.setProperty("glass.accessible.force", "false");

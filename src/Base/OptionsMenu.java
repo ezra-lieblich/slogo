@@ -1,4 +1,5 @@
 package Base;
+
 import FrontEndInternalAPI.Options;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,15 +65,14 @@ public abstract class OptionsMenu implements Options {
             );
 
     /**
-     *
      * @param s
      */
-    public OptionsMenu (Stage s){
+    public OptionsMenu(Stage s) {
         stage = s;
     }
 
     @Override
-    public Parent setUpWindow(){
+    public Parent setUpWindow() {
         startWindow = new Pane();
         startWindow.setPrefSize(START_MENU_WIDTH, START_MENU_HEIGHT);
         Image background = new Image(getClass().getClassLoader()
@@ -86,7 +86,7 @@ public abstract class OptionsMenu implements Options {
     }
 
     @Override
-    public void addNodes(){
+    public void addNodes() {
         addTitle();
         addRectangle();
         addLineStylePicker();
@@ -105,8 +105,8 @@ public abstract class OptionsMenu implements Options {
     }
 
     @Override
-    public void setBackgroundString(){
-        switch (getBackgroundBox().getValue()){
+    public void setBackgroundString() {
+        switch (getBackgroundBox().getValue()) {
             case "Circuits":
                 chosenBackground = "Images/background.jpg";
                 break;
@@ -126,8 +126,8 @@ public abstract class OptionsMenu implements Options {
     }
 
     @Override
-    public void setTurtleString(){
-        switch (getTurtleBox().getValue()){
+    public void setTurtleString() {
+        switch (getTurtleBox().getValue()) {
             case "Turtle":
                 chosenTurtle = "Images/turtle.png";
                 break;
@@ -143,18 +143,16 @@ public abstract class OptionsMenu implements Options {
             case "Prof. Duvall":
                 chosenTurtle = "Images/duvall.png";
                 break;
-
         }
-
     }
 
     @Override
-    public String getTurtleString(){
+    public String getTurtleString() {
         return chosenTurtle;
     }
 
     @Override
-    public void addLineStylePicker(){
+    public void addLineStylePicker() {
         System.setProperty("glass.accessible.force", "false");
         Line line0 = new Line(20, 40, 120, 40);
         Line line1 = new Line(20, 40, 120, 40);
@@ -190,7 +188,7 @@ public abstract class OptionsMenu implements Options {
     }
 
     @Override
-    public ColorPicker generateColorPicker(Color defaultColor, int x, int y){
+    public ColorPicker generateColorPicker(Color defaultColor, int x, int y) {
         ColorPicker penColor = new ColorPicker();
         penColor.setTranslateX(x);
         penColor.setTranslateY(y);
@@ -221,7 +219,7 @@ public abstract class OptionsMenu implements Options {
     }
 
     @Override
-    public Label generateLabel(String text, int x, int y){
+    public Label generateLabel(String text, int x, int y) {
         Label label = new Label(text);
         label.setTranslateX(x);
         label.setTranslateY(y);
@@ -243,7 +241,7 @@ public abstract class OptionsMenu implements Options {
 
 
     @Override
-    public ColorPicker getPenColor(){
+    public ColorPicker getPenColor() {
         return penColor;
     }
 
@@ -263,7 +261,9 @@ public abstract class OptionsMenu implements Options {
     }
 
     @Override
-    public ComboBox<Line> getLineBox() { return lineBox; }
+    public ComboBox<Line> getLineBox() {
+        return lineBox;
+    }
 
     @Override
     public ComboBox<String> getLanguageBox() {
@@ -271,7 +271,7 @@ public abstract class OptionsMenu implements Options {
     }
 
     @Override
-    public Stage getStage(){
+    public Stage getStage() {
         return stage;
     }
 
