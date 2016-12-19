@@ -463,6 +463,7 @@ public class GUIDisplay implements Display {
 	public void stamp(double imageIndex) {
 		// TODO Front end will draw a stamp with the imageIndex when this is called
 		//Also will add it to the list of imageViews that contain all the stamps
+		//They have access to the current position
 	}
 
 	public void clearStamps() {
